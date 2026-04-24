@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Detection</title>
+    
+    <style>
+
+        body {
+            font-family: sans-serif;
+            margin: 2rem;
+ 
+            background-color: #ffffff;
+            color: #212121;
+
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .status-box {
+            border: 2px solid #212121;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .status-box {
+            border-color: #e0e0e0;
+            background-color: #1d1d1d;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Operating System Theme Sync</h1>
+        <div id="status" class="status-box">Detecting theme...</div>
+        <p>Change your operating system's theme to "Dark" or "Light" in your system settings to see this page update instantly.</p>
+    </div>
+
+    <script>
+        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const statusDisplay = document.getElementById('status');
+        function applyColorScheme(event) {
+            if (event.matches) {
+               document.body.classList.add('dark-mode');
+                statusDisplay.innerText = "System Preference: DARK MODE (using app.py logic style)";
+            } else {
+                document.body.classList.remove('dark-mode');
+                statusDisplay.innerText = "System Preference: LIGHT MODE (default style)";
+            }
+        }
+
+          applyColorScheme(darkModeQuery);
+
+           darkModeQuery.addEventListener('change', applyColorScheme);
+    </script>
+</body>
+</html>
